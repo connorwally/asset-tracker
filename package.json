@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/connorwally/asset-tracker/issues"
   },
-  "homepage": "https://github.com/connorwally/asset-tracker#readme"
+  "homepage": "https://github.com/connorwally/asset-tracker#readme",
+  "dependencies": {
+    "asset-tracker": "file:"
+  }
 }
