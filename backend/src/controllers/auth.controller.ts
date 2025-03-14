@@ -1,6 +1,6 @@
 import {service} from '@loopback/core';
 import {post, requestBody} from '@loopback/rest';
-import {UserService} from '../services/user.services';
+import {UserService} from '../services/user.service';
 
 export class AuthController{
     constructor(

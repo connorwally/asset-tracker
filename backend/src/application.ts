@@ -9,7 +9,8 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
-import {UserService} from './services/user.services';
+import {UserService} from './services/user.service';
+import { RedisService } from './services/redis.service';
 
 export {ApplicationConfig};
 
@@ -42,6 +43,7 @@ export class AssetTrackerApplication extends BootMixin(
       },
     };
 
-    this.bind('services.UserServer').toClass(UserService);
+    this.bind('services.UserService').toClass(UserService);
+    this.bind('services.RedisService').toClass(RedisService);
   }
 }
