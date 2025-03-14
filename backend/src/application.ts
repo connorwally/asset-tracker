@@ -9,6 +9,7 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import {UserService} from './services/user.services';
 
 export {ApplicationConfig};
 
@@ -40,5 +41,7 @@ export class AssetTrackerApplication extends BootMixin(
         nested: true,
       },
     };
+
+    this.bind('services.UserServer').toClass(UserService);
   }
 }
