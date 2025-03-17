@@ -61,14 +61,19 @@ export class UserService{
         return {token};
     }
 
-    async verifyToken(token: string): Promise<User>{
-        try{
+    async verifyToken(token: string): Promise<User> {
+        try {
             const decoded = jwt.verify(token, JWT_SECRET) as {userId: number};
             const user = await this.userRepository.findById(decoded.userId);
+            
+            if (!user) {
+                throw new HttpErrors.Unauthorized('User not found.');
+            }
+            
             return user;
         }
-        catch(err){
-            throw new Error('Token is invalid or expired.');
+        catch(err) {
+            throw new HttpErrors.Unauthorized('Token is invalid or expired.');
         }
     }
 }

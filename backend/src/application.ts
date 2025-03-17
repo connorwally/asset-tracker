@@ -11,6 +11,13 @@ import path from 'path';
 import {MySequence} from './sequence';
 import {UserService} from './services/user.service';
 import { RedisService } from './services/redis.service';
+import { JWTAuthStrategy } from './authentication-strategies/JWTAuthStrategy';
+import {AuthenticationComponent, registerAuthenticationStrategy} from '@loopback/authentication';
+import { ChatGPTController } from './controllers/ChatGPTController';
+import { ChatGPTService } from './services/ChatGPTService';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export {ApplicationConfig};
 
@@ -45,5 +52,11 @@ export class AssetTrackerApplication extends BootMixin(
 
     this.bind('services.UserService').toClass(UserService);
     this.bind('services.RedisService').toClass(RedisService);
+    this.bind('services.ChatGPTService').toClass(ChatGPTService);
+
+    this.component(AuthenticationComponent);
+    registerAuthenticationStrategy(this, JWTAuthStrategy);
+
+    this.controller(ChatGPTController);
   }
 }
